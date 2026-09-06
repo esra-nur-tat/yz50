@@ -123,13 +123,30 @@ def main():
     print(f"w2: {w2.grad.item()}")
     print(f"b: {b.grad.item()}")
 
-    """ the output of pytorch case, they are the same as the output of our implementation
+
+if __name__ == "__main__":
+    main()
+
+
+    """ 
+    numerical derviative implementation
+    x1: -0.8398207515170064
+    x2: 1.6804091927624665
+    w1: 1.2602109178172505
+    w2: 0.0
+    b: 0.4200063276482702
+    micrograd implementation
+    x1: -0.839948683228052
+    x2: 1.679897366456104
+    w1: 1.259923024842078
+    w2: 0.0
+    b: 0.419974341614026
+    pytorch implementation
     -0.7615941559557649
     ......
     x1: -0.8399486832280523
     x2: 1.6798973664561045
     w1: 1.2599230248420783
     w2: 0.0
+    b: 0.41997434161402614
     """
-if __name__ == "__main__":
-    main()
