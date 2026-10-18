@@ -390,3 +390,28 @@ Konya’dan dörderdiğim muhaberen dönmek için Ferit Paşa Kabinesi’nde, Te
 
 Telgrafını teshîdinde kat’î, vâki ku
 """
+"""new tokenizer
+
+using device: mps
+tokenizer trained: 993464 bytes -> 470659 tokens (compression 2.11X), vocab_size=512
+step 0: train loss 6.4026, val loss 6.3995
+step 500: train loss 3.1031, val loss 3.2347
+step 1000: train loss 2.2544, val loss 2.5555
+step 1500: train loss 1.8966, val loss 2.4194
+step 2000: train loss 1.6067, val loss 2.4341
+step 2500: train loss 1.3481, val loss 2.5165
+step 3000: train loss 1.0936, val loss 2.6266
+step 3500: train loss 0.8738, val loss 2.7455
+step 4000: train loss 0.6877, val loss 2.9011
+step 4500: train loss 0.5367, val loss 3.0667
+pansiyonda, kızları yavaşlar bir «olur, gayet iyi anlık halinde kaldı, fakat nihayet değişmemiş!» düşüncelerden bir kadın uyuyamadı.
+
+Raif Efenden beri nefes alarak:
+
+«Hasta hakikaten oturuyorsunuz, neden bu kadar çok mânâsız şeyler isteler... Hiç!...» dedi.
+
+Yani bütün yanısına bittiğim uzaklaşabilecek hiçbir şey bırakmamış bir köze canlandım. Gözlerle bakar, sonra küçük bir müddet durgun, göğsümün bir gün onu beklenmekte olan titizce serdim.
+
+Sözümü açtım, kabahına sokak elimi altmadığını aradım. Sarım: Başını salondan öprüya baktım. Elini gitti. Neclâ arkadaşlarımı uzun müddet gördüm. Onu bu adamdı. Berin elleri keksinden nasıl hiç bir şey sormuştum. Başım ağır ağır nereye giden sonra tekrar çıkmıştım.
+
+Gülüş, ona elime girer geçirmeden ve koşarak yüzüntü kükeli hissizliğini bekçektim. Kısa ile karşı karşıya oturdum. Vücudunun onun biraz evvel bize teşekkür etmediklerini kurtard ettim. Yavaşça diki: Bütün yeni Kesik seslediğim gibi """
