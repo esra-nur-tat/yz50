@@ -285,7 +285,7 @@ step_times = []                                   # seconds per step
 # throughput by exactly grad_accum_steps (it reported 50341 instead of ~6292).
 tokens_per_step = B * T
 
-for step in range(50):
+for step in range(200):
     t0 = time.perf_counter()
     optimizer.zero_grad()  
     loss_accum = 0.0
@@ -500,3 +500,15 @@ steady median        : 4698.66 ms
 fastest / slowest    : 4623.90 / 5002.00 ms
 throughput           :    871.7 tok/sec  (from median)
 ----------------------------------------------------------------------"""
+"""200 step
+step 199, loss: 5.503137, lr: 3.0000e-05, norm: 0.9102, dt: 4737.95ms, tok/sec: 6916.07
+----------------------------------------------------------------------
+steps                : 200
+total wall time      : 960.73 s
+first step           : 5058.24 ms  (includes warmup)
+steady mean          : 4803.07 ms  (steps 5+)
+steady median        : 4773.11 ms
+fastest / slowest    : 4635.91 / 5256.04 ms
+throughput           :    858.1 tok/sec  (from median)
+----------------------------------------------------------------------
+DELL@MacBook-Pro week11 % """
