@@ -31,7 +31,7 @@ soru modelin bunun ötesine geçip geçmediği.
 
 Mimari hafta 8'deki `v2.py` ile aynı: token ve öğrenilen pozisyon embedding'i,
 6 adet pre-LN transformer bloğu (n_embd 384,
-6 kafa, dropout 0,20), final LayerNorm,
+6 head, dropout 0,20), final LayerNorm,
 lm_head. Toplam 10,74M parametre.
 
 Diziler bağımsız kayıtlar olduğu için uç uca eklenmedi: her dizinin başına BOS
@@ -42,14 +42,13 @@ arası geçiş öğrenmiyor ve dizi başına loss tanımlı hale geliyor. `block
 Hafta 8'den iki sapma var. Birincisi dikkat, el yazımı tril maskesi yerine
 `scaled_dot_product_attention` ile hesaplanıyor; matematiği aynı, füzyonlu
 çekirdek MPS'te daha hızlı. İkincisi bir düzeltme: hafta 8'de ölçeklendirme
-`n_embd ** -0.5` idi, oysa standart formülasyon `head_size ** -0.5` ister. Çok
-kafalı dikkate geçerken oluşan bir kayma; altı kafayla attention logit'lerini
+`n_embd ** -0.5` idi, oysa standart formülasyon `head_size ** -0.5` ister. Multi head attention'a geçerken oluşan bir kayma; 6 head attention logit'lerini
 1/√6 kat fazla küçültüyordu, yani dikkat dağılımı olması gerekenden
-yumuşaktı. Buradaki iki yol da doğru ölçeği kullanıyor.
+dah smooth. Buradaki iki yol da doğru ölçeği kullanıyor.
 
 ## Eğitim
 
-3.268 optimizer adımı, 52,50M token
+3.268 optimizer step, 52,50M token
 (≈ 14,2 epoch), eğitim adımlarının toplam süresi
 35,0 dakika, ortalama 24.991 token/saniye.
 Değerlendirme ve üretim süresi bu hıza dahil değil.
