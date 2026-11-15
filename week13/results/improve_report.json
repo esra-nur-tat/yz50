@@ -1,0 +1,13 @@
+{
+  "tier1_mean_loss": {
+    "auroc": 0.7245702219196195
+  },
+  "tier1_gc": {
+    "auroc": 0.7953038690388088
+  },
+  "tier2_likelihood_ratio": {
+    "auroc": 0.9207811096967723
+  },
+  "tier2_ratio_gc_corr": 0.5696626505704855,
+  "tier2_ratio_gc_curvature": 0.3672574808786057
+}

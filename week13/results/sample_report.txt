@@ -1,0 +1,96 @@
+device: mps | checkpoint step 2800
+real promoter GC (500 test sequences): 0.6295
+
+======================================================================
+1. UNCONDITIONAL GENERATION -- input: nothing but BOS
+======================================================================
+
+>generated_0  GC=0.6693
+  AAAGTGGATCCAGCCACCAGGGAGTGCAGCTCTTATTGGCGCCCCTCCACATTGAGGGACTCCAGGCCTTGGAGGAGAAG
+  CTGGCTCCGGAGCCGGTGGAGGGTGAGCAAAGCCCCGAGGGAGGGGGACGGGAACGCCTGAAGCGGCTGGGGCCCCGGCT
+  GCCTAGCAGCTATAAGGCGGGCGGGGAGGCCTCTTCCCTCAATCTGGACCAGCTCCGGATGCAGCAGCCGCCACCGTCTC
+  GGCTTCCAGCG
+
+>generated_1  GC=0.6574
+  CCAACGTTCACTAACAAACACTCGCATATTAATGGCGAGCCAAACGCTGACTTCTGCGCGCTGCAGCTTCATGCCAGCTC
+  CGCGCCGCCGCAGGGCCACCCCTTGGGGGCCTTCCACGAATGGGGGCGGAGGCGGCAGCGGTCGCGGCGGAGGTTGGTGC
+  GCGAGCTCCAGGTTCAGCACTCTGCGCCGTGCACGGGGTCAACGGGTGACTGGCTTGGGCGCGGGAAGGGCGGTACATCC
+  ATCTTCTTGCG
+
+>generated_2  GC=0.4104
+  GCTGTCCAGTTTTGTGTTGTGTGTCCCAGCATTTGCCAACAGGATGTGCAGCTGTTTATAAAGGTCACACAACCAAAGTG
+  CAGAACACATCAGCTGGAAATTTGAAACAGAGTCCACATAACAGCTTGTGTTCCAATTGCATAATGTAACATGCTCCACC
+  TACATGGACAGATGGTCTTTGATTTCTCCTTTCTATGAATGAGTGAATACTCTGGAAGCAGATATTAAAGGAGAAAAAGG
+  AAAAGGAACTG
+
+>generated_3  GC=0.3904
+  GTGAAGCTGGAGTATTGGTTGTTGTTAATTTTATCTTATGAGCATCTTTGCCACTTCATTACCTTTATTTCAACACTGCC
+  TAAACTGAAAAGTTTTTTAACCAGCCTATAGAAATTTGAGCTGGCATACACAAAGACAATGATTTTCAGGAGCAACACCC
+  TGTATGGAAGCTGCCTGTCAGGTCTCCCTCCCCAAGATTAAGAATTGTTCTCTGTTCGGATTATTCCTCTTGAGGATGAA
+  GTTTAAGGAAG
+
+mean generated GC = 0.5319 vs real 0.6295
+
+======================================================================
+2. PROMPT CONTINUATION -- input: first 125 bp of a real promoter
+======================================================================
+
+--- sequence 0 ---
+  prompt      (125 bp, GC=0.624): ...AGATACAACCGCCATCTTTGATTTCTCTGCAGAGCATGTTGGGAAAGCGTGCCTCGACCT
+  model wrote (126 bp, GC=0.754): GGGGATGGAATCCAGGGTGGGGCGGCTTCTCGAAGCCCAGGTCCCCTCCCCTCCGGTGCT...
+  real was    (126 bp, GC=0.548): TCAGGAAGGTGGGGCGCAGTGGGCGGGGAGCAGGGAACAGCTCCGCTATTGGCTGAAGCG...
+
+--- sequence 1 ---
+  prompt      (125 bp, GC=0.784): ...GCTCCGCCCTGTCACGTGACACCAAGCGCTGGCCGCCTCCCGCCCCCCGCGAGGGGAGGG
+  model wrote (126 bp, GC=0.889): CGCGGCGGGGCGCCCGCGGCCACCCCGAGAGGGGCCGGGGCGGGGAGGCCTGGCGGCGCC...
+  real was    (126 bp, GC=0.770): CCGTCTCGCGCCTGCGCAGAAGGGGCTGGAGGCGGGCGCGTCCGGTTGACTGACAGCTCG...
+
+--- sequence 2 ---
+  prompt      (125 bp, GC=0.688): ...CGCGACGCAAACAAGAGTCGCAAGCTTCCGGGTCCCCGCCCCACCCCGGCTCCGCCCCTC
+  model wrote (126 bp, GC=0.778): CTGACCCTGCCTGCCCTCCTCGGCCGCCCGCCCCGCCCCCGCTGTGGGCCACAGGGCCGA...
+  real was    (126 bp, GC=0.571): CCCCAACCCTGCCAGGCTCTCCAATCGCATGTGGAATTATCGCTCTACCCAGGCGGTGGT...
+
+--- sequence 3 ---
+  prompt      (125 bp, GC=0.744): ...AGAGGCAGCCAATGGGCGCGGGGAGGGGGCGGAACGCCCGCGCTGAGCAGCCAATAGGGG
+  model wrote (126 bp, GC=0.698): GGAGCCAAAAGGAGCCCAGGGACCGGGGCGGCGGCGAGGCAATCGGACAGCTTTTTCCGT...
+  real was    (126 bp, GC=0.825): TGCTAGGGGCGGGGCGTGCGGACCGCGGGCCAATGGGGGCGCGGGGCCCGGGTGCGCCGC...
+
+continuation GC: model 0.7798 vs real 0.6786
+NOTE: matching GC is not the same as matching structure. The model
+      reproduces composition; whether it reproduces motifs is what
+      the mutagenesis map addresses.
+
+======================================================================
+3. PER-POSITION READOUT -- input: a whole real sequence, no sampling
+======================================================================
+
+first 20 positions of test sequence 0:
+   pos  actual  predicted  p(actual)  entropy       A      C      G      T
+     0       A          G     0.1995    1.975   0.200  0.289  0.303  0.209
+     1       A          G     0.2636    1.955   0.264  0.227  0.341  0.169
+     2       A          A     0.3235    1.961   0.324  0.193  0.291  0.193
+     3       C          A     0.1744    1.949   0.359  0.174  0.247  0.220
+     4       C          A     0.2618    1.953   0.306  0.262  0.149  0.284
+     5       C          C     0.3079    1.973   0.248  0.308  0.177  0.268
+     6       G          C     0.2158    1.994   0.246  0.280  0.216  0.257
+     7       C          C     0.3635    1.859   0.168  0.363  0.350  0.119
+     8       C          C     0.3614    1.947   0.198  0.361  0.254  0.186
+     9       C          C     0.3508    1.962   0.197  0.351  0.225  0.226
+    10       G          C     0.2404    1.941   0.189  0.374  0.240  0.197
+    11       C          C     0.4714    1.757   0.125  0.471  0.292  0.111
+    12       C          C     0.3914    1.890   0.156  0.391  0.292  0.161
+    13       G          C     0.2424    1.885   0.152  0.420  0.242  0.185
+    14       A          C     0.1010    1.675   0.101  0.509  0.293  0.097
+    15       C          G     0.3146    1.843   0.207  0.315  0.386  0.092
+    16       C          C     0.3980    1.913   0.166  0.398  0.244  0.192
+    17       C          C     0.4113    1.884   0.150  0.411  0.265  0.174
+    18       G          C     0.2929    1.891   0.156  0.390  0.293  0.160
+    19       T          C     0.0894    1.716   0.126  0.483  0.302  0.089
+
+  argmax accuracy over all 251 positions: 0.3625 (a model guessing the commonest base would get 0.3227 here)
+  mean NLL: 1.3498 nats = 1.9473 bits/base
+
+  This is the readout AUROC is built on: no sampling, just the
+  probability the model assigns to the bases that are actually there.
+
+(tip: python3 -u sample.py > results/sample_report.txt to save this)

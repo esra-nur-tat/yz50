@@ -1,0 +1,6 @@
+# data and checkpoints are reproducible from the scripts; keep them out
+data/
+*.pt
+*.npz
+__pycache__/
+.DS_Store

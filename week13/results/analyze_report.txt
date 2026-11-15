@@ -1,0 +1,66 @@
+device: mps | checkpoint: results/best.pt (step 2800, val 1.2719 = 1.8350 bits/base)
+parameters: 10.74M
+
+test set: 4915 positive, 4119 negative
+
+=== 0. REFERENCE LEVELS (bits per base) ===
+  uniform over 6 tokens (at init) : 2.5850
+  uniform over 4 bases (random)         : 2.0000
+  unigram, base frequencies only        : 1.9529
+  model, best validation                : 1.8350
+  base frequencies: A 0.1824, C 0.3034, G 0.3228, T 0.1914
+  >>> gain over random  : +0.1650
+  >>> gain over unigram : +0.1180  (71% of the gain over random is contextual)
+
+=== 1. PER-SEQUENCE LOSS ===
+  positive: 1.2770 nats = 1.8423 bits/base (sd 0.0733)
+  negative: 1.3288 nats = 1.9170 bits/base (sd 0.0394)
+  gap     : +0.0748 bits/base
+  >>> MODEL AUROC = 0.7263
+
+=== 2. GC BASELINE ===
+  mean GC: positive 0.6271 | negative 0.4844
+  >>> GC-ONLY AUROC = 0.7959
+  >>> GAP (model - GC) = -0.0696
+  reading: the GC baseline beats the model. That is also a result.
+
+  correlation between per-sequence loss and GC fraction:
+    all sequences : r = -0.6084  (r^2 = 0.3702)
+    positives only: r = -0.6958
+    negatives only: r = -0.1167
+    -> the score carries substantial non-GC information.
+    AUROC of the loss after removing GC linearly: 0.5600
+       (0.5 would mean the score is GC and nothing else)
+
+=== 3. IN-SILICO SATURATION MUTAGENESIS ===
+  sequence #3208: scoring 753 mutants (original 1.2498 bits/base)
+    total delta: mean +1.9789 nats, max +6.5913
+    local delta: mean +1.4277 nats, max +5.6969
+    local share of total effect: 72.1%
+    top 10 positions (raw total delta): [68, 86, 134, 147, 150, 153, 155, 156, 165, 189]
+    position-bias correlation (|delta| vs downstream) = +0.056
+      -> no meaningful position bias; the effect is local, so
+         no normalisation is applied.
+    mean total delta by mutant base (higher = more damaging):
+      -> T: +3.1221 nats
+      -> A: +2.2952 nats
+      -> C: +1.2494 nats
+      -> G: -0.3139 nats
+    spread across mutant bases : 3.4360 nats
+    spread across positions    : 7.3768 nats
+    ratio (base / position)    : 0.47
+  redrew loss.png with the unigram baseline
+
+=== 5. skipped: scikit-learn not installed ===
+
+====================================================
+SUMMARY
+====================================================
+  model AUROC (loss)      : 0.7263
+  GC-only AUROC           : 0.7959
+  bits/base pos vs neg    : 1.8423 / 1.9170
+  bits/base model vs unigram vs random: 1.8350 / 1.9529 / 2.0000
+  loss-GC correlation     : r = -0.6084 (r^2 = 0.3702)
+  AUROC after removing GC : 0.5600
+
+  figures -> results/auroc_hist.png, mutagenesis_seq*.png, embedding_pca.png

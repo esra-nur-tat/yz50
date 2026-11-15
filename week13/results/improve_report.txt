@@ -1,0 +1,33 @@
+device: mps | promoter model step 2800
+
+test set 9034 sequences -> fit 4517, evaluate 4517
+Tier 1 and 2 need no fitting; they are still scored on the
+evaluation half alone so every row is comparable.
+
+computing features...
+  loss profile (9034, 251), embedding (9034, 384)
+
+=== TIER 1: no labels used at any point ===
+  mean loss under the promoter model           AUROC 0.7246
+  GC fraction                                  AUROC 0.7953
+
+=== TIER 2: labels used to build a second model, not to score ===
+  negative-class model: step 1855, val 1.8921 bits/base
+  likelihood ratio (neg model - pos model)     AUROC 0.9208
+    correlation with GC: single model -0.608, ratio +0.570
+    curvature of the ratio against GC: +0.367 (the single model's was negative and large)
+
+=== TIER 3: supervised probes on frozen features ===
+  skipped: scikit-learn not installed (python3 -m pip install scikit-learn)
+
+==================================================================
+SUMMARY  (all on the same evaluation half)
+==================================================================
+  0.9208  tier2_likelihood_ratio
+  0.7953  tier1_gc
+  0.7246  tier1_mean_loss
+
+wrote results/improve_report.json
+
+Reminder: tier 3 rows use labels to fit, tier 1 rows do not.
+They answer different questions and should not be ranked together.

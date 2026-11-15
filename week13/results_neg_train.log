@@ -1,0 +1,34 @@
+device: mps | fused attention (SDPA): True
+vocab_size=6, seq_length=251, stoi={'A': 1, 'C': 2, 'G': 3, 'N': 4, 'T': 5}
+modelling the NEG class
+train 11738 sequences (2.95 Mbase), val 617 sequences
+parameters: 10.74M
+16,064 tokens/step -> about 183 steps per epoch
+
+budget 20 min. random baseline 2.00 bits/base.
+
+step      0 | train 1.7858 | val 1.7866 | 2.5775 bits/base | 0.00M tokens | epoch 0.0 | 0.0 min  <- best
+step    100 | train 1.3263 | val 1.3287 | 1.9169 bits/base | 1.61M tokens | epoch 0.5 | 1.1 min  <- best
+step    200 | train 1.3235 | val 1.3242 | 1.9104 bits/base | 3.21M tokens | epoch 1.1 | 2.1 min  <- best
+step    300 | train 1.3211 | val 1.3236 | 1.9095 bits/base | 4.82M tokens | epoch 1.6 | 3.2 min  <- best
+step    400 | train 1.3200 | val 1.3220 | 1.9073 bits/base | 6.43M tokens | epoch 2.2 | 4.3 min  <- best
+step    500 | train 1.3209 | val 1.3225 | 1.9079 bits/base | 8.03M tokens | epoch 2.7 | 5.4 min
+step    600 | train 1.3188 | val 1.3217 | 1.9068 bits/base | 9.64M tokens | epoch 3.3 | 6.5 min  <- best
+step    700 | train 1.3187 | val 1.3202 | 1.9046 bits/base | 11.24M tokens | epoch 3.8 | 7.5 min  <- best
+step    800 | train 1.3154 | val 1.3202 | 1.9046 bits/base | 12.85M tokens | epoch 4.4 | 8.6 min  <- best
+step    900 | train 1.3154 | val 1.3194 | 1.9035 bits/base | 14.46M tokens | epoch 4.9 | 9.7 min  <- best
+step   1000 | train 1.3134 | val 1.3180 | 1.9015 bits/base | 16.06M tokens | epoch 5.5 | 10.8 min  <- best
+step   1100 | train 1.3124 | val 1.3168 | 1.8998 bits/base | 17.67M tokens | epoch 6.0 | 11.9 min  <- best
+step   1200 | train 1.3128 | val 1.3158 | 1.8983 bits/base | 19.28M tokens | epoch 6.5 | 12.9 min  <- best
+step   1300 | train 1.3113 | val 1.3140 | 1.8957 bits/base | 20.88M tokens | epoch 7.1 | 14.0 min  <- best
+step   1400 | train 1.3113 | val 1.3163 | 1.8990 bits/base | 22.49M tokens | epoch 7.6 | 15.1 min
+step   1500 | train 1.3085 | val 1.3129 | 1.8941 bits/base | 24.10M tokens | epoch 8.2 | 16.2 min  <- best
+step   1600 | train 1.3077 | val 1.3140 | 1.8957 bits/base | 25.70M tokens | epoch 8.7 | 17.3 min
+step   1700 | train 1.3084 | val 1.3120 | 1.8928 bits/base | 27.31M tokens | epoch 9.3 | 18.3 min  <- best
+step   1800 | train 1.3044 | val 1.3131 | 1.8944 bits/base | 28.92M tokens | epoch 9.8 | 19.4 min
+
+done. 1855 steps, 29.80M tokens, 10.1 epochs
+best val 1.3115 nats = 1.8921 bits/base
+training steps 20.0 min, wall 22.1 min, 24,819 tokens/s
+generated GC 0.4552 vs real GC 0.4770
+-> results_neg/ : best.pt, last.pt, metrics.csv, loss.png, samples.txt
